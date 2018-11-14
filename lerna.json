@@ -2,6 +2,12 @@
   "packages": [
     "packages/*"
   ],
+  "command": {
+    "publish": {
+      "verifyAccess": false,
+      "registry": "https://api.bintray.com/npm/haraldf/npm-testing"
+    }
+  },
   "version": "independent",
   "npmClient": "yarn",
   "useWorkspaces": true
