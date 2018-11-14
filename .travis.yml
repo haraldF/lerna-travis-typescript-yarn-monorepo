@@ -1,6 +1,9 @@
 language: node_js
 node_js:
-    - "10"
+  - "10"
+
+before_deploy:
+  - cp .npmrc-publish .npmrc
 
 deploy:
   provider: script
