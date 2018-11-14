@@ -7,6 +7,9 @@
     "prepare": "tsc --sourceMap false",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "publishConfig": {
+      "registry": "https://api.bintray.com/npm/haraldf/npm-testing"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
