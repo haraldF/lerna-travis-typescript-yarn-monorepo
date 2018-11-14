@@ -2,6 +2,9 @@
   "name": "lerna-travis-typescript-yarn-monorepo",
   "version": "1.0.0",
   "description": "Demo repository how to have a TypeScript monorepo using yarn workspaces published with lerna from Travis CI",
+  "workspaces": [
+    "packages/*"
+  ],
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
