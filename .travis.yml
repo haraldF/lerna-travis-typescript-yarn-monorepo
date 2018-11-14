@@ -2,10 +2,14 @@ language: node_js
 node_js:
   - "10"
 
-before_deploy:
+# update yarn to the newest version
+before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.12.3
   - export PATH="$HOME/.yarn/bin:$PATH"
-  - cp .npmrc-publish .npmrc
+
+# install our .npmrc system-wide
+before_deploy:
+  - cp .npmrc-publish ~/.npmrc
 
 deploy:
   provider: script
