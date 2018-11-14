@@ -1,6 +1,6 @@
 {
   "name": "lttym-app",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -14,7 +14,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "lttym-lib": "^1.0.0"
+    "lttym-lib": "^1.0.1"
   },
   "devDependencies": {
     "typescript": "^3.1.6"
