@@ -1,3 +1,11 @@
 language: node_js
 node_js:
     - "10"
+
+deploy:
+  provider: script
+  script: echo npx lerna publish -y from-git
+  skip_cleanup: true
+  on:
+    tags: true
+    branch: master
