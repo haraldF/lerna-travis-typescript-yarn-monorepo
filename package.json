@@ -1,0 +1,21 @@
+{
+  "name": "lerna-travis-typescript-yarn-monorepo",
+  "version": "1.0.0",
+  "description": "Demo repository how to have a TypeScript monorepo using yarn workspaces published with lerna from Travis CI",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/haraldF/lerna-travis-typescript-yarn-monorepo.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "private": true,
+  "bugs": {
+    "url": "https://github.com/haraldF/lerna-travis-typescript-yarn-monorepo/issues"
+  },
+  "homepage": "https://github.com/haraldF/lerna-travis-typescript-yarn-monorepo#readme"
+}
