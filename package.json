@@ -24,7 +24,7 @@
     "url": "https://github.com/haraldF/lerna-travis-typescript-yarn-monorepo/issues"
   },
   "homepage": "https://github.com/haraldF/lerna-travis-typescript-yarn-monorepo#readme",
-  "dependencies": {
+  "devDependencies": {
     "lerna": "^3.4.3",
     "ts-node": "^7.0.1",
     "typescript": "^3.1.6"
