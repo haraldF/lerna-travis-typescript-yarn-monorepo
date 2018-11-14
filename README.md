@@ -93,3 +93,7 @@ Instead of checking our secret token into git, where it would be world readable,
 
 * `lerna bootstrap` would be an alternative to `yarn workspaces`, but I found it more natural to let my package manager handle all package dependencies, including the dependencies between the packages within the monorepo. Also, I perceive `yarn`'s performance a bit faster than `lerna`'s.
 * Any other CI system besides Travis CI. Pretty much any CI system that supports injecting secure tokens to a build should do fine.
+
+## There are better ways to do it!
+
+Great! Please feel free to submit PRs if you think that something can be solved more elegantly, or leave a bug report if you think something is not right.
