@@ -17,8 +17,6 @@ The best solution I found so far is:
 * Use [lerna](https://lernajs.io/) for publishing. `lerna` automagically figures out which packages have changed since the last publish, does the tagging and bumping of versions and uploading for us. No custom script magic required.
 * Use [Travis CI](https://travis-ci.org/) for continuous integration and publishing. Its defaults are sane and it integrates beautifully with GitHub.
 
-This workflow is supported by most tools and packages.
-
 ## Developing
 
 Clone this repo, then run `yarn install` to install the dependencies.
@@ -26,6 +24,24 @@ Clone this repo, then run `yarn install` to install the dependencies.
 **Note**: For [Visual Studio Code](https://code.visualstudio.com/) to work correctly, `yarn install` must be run once. After that, code completion should run out of the box.
 
 Try running `yarn test`. Then modify the `lttym-lib` library and run `yarn test` again - voila, your modifications to the library are automagically picked up by the app without any hacks required. Happy parallel developing :)
+
+## Publishing
+
+In order to have reproducable and stable environment for publishing, it must happen from within CI. A developer's machine might have local changes, uncommitted files, or other fancy settings that might affect the generated packages.
+
+CI systems generally use tagged docker images and from the log, we can easily reconstruct how a package was built and published. It also reduces the risk of accidentally publishing a package without tagging or bumping the version number correctly.
+
+What must also be given is that the token used to authenticate to the server must be secure. For this, one must define a secure environment variable called `NPM_TOKEN` in the `Travis CI` configuration.
+
+To create a new release, run:
+
+```sh
+npx lerna version patch
+```
+
+This bumps the version of all the packages that were modified since the last publish and pushes the commits including the git tags to GitHub.
+
+Travis CI is configured to listen to new git tags (see `.travis.yml`) and will do the actual publishing automagically using lerna.
 
 ## Alternatives
 
