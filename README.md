@@ -43,6 +43,52 @@ This bumps the version of all the packages that were modified since the last pub
 
 Travis CI is configured to listen to new git tags (see `.travis.yml`) and will do the actual publishing automagically using lerna.
 
+## Magic
+
+### Directory Structure
+
+Let's start with the directory structure - the defacto standard for `lerna` based repositories is to have one "super" `package.json` in the root directory and the individual packages in a `packages` directory.
+
+### Yarn Workspaces
+
+The root `package.json contains the following:
+
+```json
+  "workspaces": [
+    "packages/*"
+  ],
+```
+
+This indicates to `yarn` that it's a workspace. Packages within a workspace can depend on each other and yarn will link it all correctly together.
+
+### Packages
+
+The packages in the `packages` directory are pretty standard node.js packages.
+
+In order to ease packaging, the TypeScript compiler `tsc` is executed in the `prepare` phase of the package, so when `lerna` packs it all together, the package is automagically transpiled to JavaScript.
+
+A note about `.gitignore` and `.npmignore`: It's good practice to have TypeScript files in git, but not in the generated package and JavaScript files in the generated package but not in git. That's why `.gitignore` ignores all `*.js` files and `.npmignore` ignores all `*.ts` files.
+
+### Lerna
+
+The `lerna.json` file is also pretty standard, the only exception is the custom registry. Since I don't want to publish dummy packages to npmjs.com, I've opened a dummy repository on [bintray](https://bintray.com).
+
+### Travis (.travis.yml)
+
+Unfortunately, Travis CI comes with an old version of `yarn`, so it's upgraded in `before_install`.
+
+In `before_deploy`, the custom `.npmrc-publish` configuration file is copied to the user's home directory to make it available system wide.
+
+The custom `.npmrc` contains the following magic line:
+
+```
+//api.bintray.com/npm/haraldf/npm-testing/:_authToken=${NPM_TOKEN}
+```
+
+This is described in the npm documentation: [https://docs.npmjs.com/using-private-packages-in-a-ci-cd-workflow](https://docs.npmjs.com/using-private-packages-in-a-ci-cd-workflow)
+
+Instead of checking our secret token into git, where it would be world readable, the token is consumed via the environment variable `NPM_TOKEN`. In the Travis CI, this environment variable can be documented as secret token and won't be displayed to the user.
+
 ## Alternatives
 
 * `lerna bootstrap` would be an alternative to `yarn workspaces`, but I found it more natural to let my package manager handle all package dependencies, including the dependencies between the packages within the monorepo. Also, I perceive `yarn`'s performance a bit faster than `lerna`'s.
